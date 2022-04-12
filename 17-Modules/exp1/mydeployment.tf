@@ -12,3 +12,14 @@ module "net" {
   my_vpc_subnet_cidr = ["192.168.1.0/24" ]
   my_vm_count = 2 
 }
+
+
+module "compute" { 
+  source = "./modules/compute"
+  my_rg_name = "devops"
+  my_loc     = "eastus"
+  my_vm_count = 2
+  my_nic_id  = module.net.my_nic
+}
+
+
