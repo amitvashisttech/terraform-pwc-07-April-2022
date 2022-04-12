@@ -1,0 +1,80 @@
+```
+940  mkdir 17-Modules
+  941  cd 17-Modules/
+  942  ls
+  943  mkdir exp1/modules
+  944  mkdir exp1/modules -p 
+  945  ls
+  946  cd exp1/
+  947  ls
+  948  cd modules/
+  949  ls
+  950  mkdir compute network
+  951  ls
+  952  cd network/
+  953  ls
+  954  cp -rf ../../../../16-DataSources/exp3/provider.tf .
+  955  cp -rf ../../../../16-DataSources/exp3/variable.tf .
+  956  cp -rf ../../../../16-DataSources/exp3/network.tf .
+  957  ls
+  958  terraform init 
+  959  terraform plan 
+  960  ls
+  961  cd ..
+  962  ls
+  963  cd compute/
+  964  ls
+  965  cp -rf ../../../../16-DataSources/exp3/compute.tf .
+  966  cp -rf ../../../../16-DataSources/exp3/provider.tf .
+  967  cp -rf ../../../../16-DataSources/exp3/variable.tf .
+  968  ls
+  969  terraform init 
+  970  terraform plan
+  971  ls
+  972  vim compute.tf 
+  973  vim variable.tf 
+  974  cat compute.tf 
+  975  ls
+  976  vim variable.tf 
+  977  ls
+  978  cd ..
+  979  ls
+  980  cd ..
+  981  ls
+  982  vim mydeployment.tf
+  983  terraform init 
+  984  ls
+  985  cd modules/
+  986  ls
+  987  cd network/
+  988  ls
+  989  cat network.tf 
+  990  ls
+  991  vim variable.tf 
+  992  ls
+  993  vim network.tf 
+  994  vim variable.tf 
+  995  ls
+  996  terraform validate 
+  997  terraform plan 
+  998  ls
+  999  cd ..
+ 1000  ls
+ 1001  cd ..
+ 1002  ls
+ 1003  cat mydeployment.tf 
+ 1004  terraform init 
+ 1005  ls -a 
+ 1006  ls -R .terraform
+ 1007  cat .terraform/modules/modules.json 
+ 1008  ls
+ 1009  terraform apply --auto-approve 
+ 1010  ls
+ 1011  vim modules/network/variable.tf 
+ 1012  terraform apply --auto-approve 
+ 1013  terraform show 
+ 1014  ls
+ 1015  vim mydeployment.tf 
+ 1016  terraform init 
+ 1017  terraform apply --auto-approve 
+```
