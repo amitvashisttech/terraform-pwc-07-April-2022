@@ -1,0 +1,25 @@
+```  
+  109  mkdir 04-Node-Exporter
+  110  cd 04-Node-Exporter/
+  111  vim install-node-exporter.sh
+  112  chmod +x install-node-exporter.sh
+  113  ./install-node-exporter.sh
+  114  vim /etc/prometheus/prometheus.yml
+  115  systemctl status node-exporter
+  116  netstat -tulnp
+  117  systemctl status node_exporter
+  118  systemctl stop prometheus
+  119  systemctl start prometheus
+  120  systemctl status prometheus
+  121  ip addr
+  122  vim /etc/prometheus/prometheus.yml
+  123  systemctl stop prometheus
+  124  systemctl start prometheus
+  125  systemctl status prometheus
+  126  ls
+  127  vim /etc/prometheus/prometheus.yml
+  128  ls
+  129  systemctl stop prometheus
+  130  systemctl start prometheus
+  131  systemctl status prometheus
+```
