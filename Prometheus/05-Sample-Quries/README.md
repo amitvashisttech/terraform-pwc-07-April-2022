@@ -38,3 +38,14 @@ irate(node_cpu_seconds_total{job="node",instance="localhost:9100",mode!="idle"}[
 irate(node_cpu_seconds_total{job="node",instance="localhost:9100",mode!="idle"}[15m])
 
 ```
+
+# Memory Utilization
+```
+1. Used
+(node_memory_MemTotal_bytes{instance="10.0.2.4:9100",job="node"} - node_memory_MemFree_bytes{instance="10.0.2.4:9100",job="node"} - node_memory_Cached_bytes{instance="10.0.2.4:9100",job="node"} - node_memory_Buffers_bytes{instance="10.0.2.4:9100",job="node"} ) /1024 / 1024
+
+2. Legend : Used  & Y-Axes to Unit : Bytes(MB)
+3. Add Query B ->   Legend: Free  ( node_memory_MemFree_bytes{instance="172.31.0.101:9100",job="node"} )
+4. Add Query C ->   Legend: Cached ( node_memory_Cached_bytes{instance="172.31.0.101:9100",job="node"} )
+5. Add Query D ->   Legend: Buffer ( node_memory_Buffers_bytes{instance="172.31.0.101:9100",job="node"} )
+```
