@@ -71,3 +71,35 @@ Edit the Dashboard -> Select Variables from left hand menu -> add new variable
 ```
 node_filesystem_size_bytes{instance="$node",job="$job",device!~'rootfs'} - node_filesystem_avail_bytes{instance="$node",job="$job",device!~'rootfs'}
 ```
+
+
+
+# Create Quick View & Its Panels
+
+```
+Dashboard Type ( Type State ) 
+```
+```
+count(count(node_cpu_seconds_total{instance="$node",job="$job"}) by (cpu))
+
+node_time_seconds{instance="$node",job="$job"} - node_boot_time_seconds{instance="$node",job="$job"}
+
+
+node_memory_MemTotal_bytes{instance="$node",job="$job"}
+
+
+node_filesystem_size_bytes{instance="$node",job="$job",mountpoint="/",fstype!="rootfs"}
+
+```
+
+
+```
+Dashboard Type ( Type Guage ) 
+```
+```
+((node_memory_MemTotal_bytes{instance="$node",job="$job"} - node_memory_MemFree_bytes{instance="$node",job="$job"}) / (node_memory_MemTotal_bytes{instance="$node",job="$job"} )) * 100
+
+
+100 - ((node_filesystem_avail_bytes{instance="$node",job="$job",mountpoint="/",fstype!="rootfs"} * 100) / node_filesystem_size_bytes{instance="$node",job="$job",mountpoint="/",fstype!="rootfs"}
+
+```
