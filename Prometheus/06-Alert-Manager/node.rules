@@ -1,0 +1,52 @@
+--- 
+groups: 
+  - 
+    name: example
+    rules: 
+      - 
+        alert: HostHighCpuLoad
+        annotations: 
+          description: |-
+              CPU load is > 60%
+                VALUE = {{ $value }}
+                LABELS: {{ $labels }}
+          summary: "Host high CPU load (instance {{ $labels.instance }})"
+        expr: "100 - (avg by(instance) (irate(node_cpu_seconds_total{job='node',mode=\"idle\"}[5m])) * 100) > 20"
+        for: 1m
+        labels: 
+          severity: warning
+      - 
+        alert: HostOutOfMemory
+        annotations: 
+          description: |-
+              Node memory is filling up (< 10% left)
+                VALUE = {{ $value }}
+                LABELS = {{ $labels }}
+          summary: "Host out of memory (instance {{ $labels.instance }})"
+        expr: "( node_memory_MemAvailable_bytes / node_memory_MemTotal_bytes * 100 < 10 )"
+        for: 2m
+        labels: 
+          severity: warning
+      - 
+        alert: "Node down"
+        annotations: 
+          description: "Failed to scrape {{ $labels.job }} on {{ $labels.instance }} for more than 3 minutes. Node seems down."
+          title: "Node {{ $labels.instance }} is down"
+        expr: "up{job=\"node\"} == 0"
+        for: 3m
+        labels: 
+          severity: warning
+      - 
+        alert: HostMemoryUnderMemoryPressure
+        annotations: 
+          description: |-
+              The node is under heavy memory pressure. High rate of major page faults
+                VALUE = {{ $value }}
+                LABELS = {{ $labels }}
+          summary: "Host memory under memory pressure (instance {{ $labels.instance }})"
+        expr: "rate(node_vmstat_pgmajfault[1m]) > 1000"
+        for: 2m
+        labels: 
+          severity: warning
+
+

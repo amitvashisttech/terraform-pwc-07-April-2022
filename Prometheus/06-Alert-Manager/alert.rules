@@ -1,0 +1,11 @@
+groups:
+- name: example
+  rules:
+  - alert: HostHighCpuLoad
+    expr: 100 - (avg by(instance) (irate(node_exporter_cpu_seconds_total{job='node_exporter',mode="idle"}[5m])) * 100) > 20
+    for: 1m
+    labels:
+      severity: warning
+    annotations:
+      summary: "Host high CPU load (instance {{ $labels.instance }})"
+      description: "CPU load is > 60%\n  VALUE = {{ $value }}\n  LABELS: {{ $labels }}"
