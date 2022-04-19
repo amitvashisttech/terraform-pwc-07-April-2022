@@ -49,3 +49,25 @@ irate(node_cpu_seconds_total{job="node",instance="localhost:9100",mode!="idle"}[
 4. Add Query C ->   Legend: Cached ( node_memory_Cached_bytes{instance="172.31.0.101:9100",job="node"} )
 5. Add Query D ->   Legend: Buffer ( node_memory_Buffers_bytes{instance="172.31.0.101:9100",job="node"} )
 ```
+
+
+# Add Varibale on Dashboard Level 
+Edit the Dashboard -> Select Variables from left hand menu -> add new variable
+
+1. NAME: DS_PROMETHEUS , TYPE: Data source, LABEL: datasource, Data Source Option TYPE: Prometheus -> Update.
+2. NAME: job           , TYPE: Query,       LABEL: Job,        Query Option      Query: label_values(node_uname_info,job) -> Update.
+3. NAME: node          , TYPE: Query,       LABEL: Host,       Query Option      Query: label_values(node_uname_info{job="$job"}, instance) , Sort: (asc) -> Update. 
+
+4. NAME: diskdevices   , TYPE: Custom,      Hide: Variable,    Custom Option     Values separated by comma : [a-z]+|nvme[0-9]+n[0-9]+|mmcblk[0-9]+ -> Update.
+
+
+
+## Memory Usage
+```
+100 - (   avg(node_memory_MemAvailable_bytes{job="$job", instance="$node"})  /   avg(node_memory_MemTotal_bytes{job="$job", instance="$node"}) * 100 )
+```
+
+## Disk Usage
+```
+node_filesystem_size_bytes{instance="$node",job="$job",device!~'rootfs'} - node_filesystem_avail_bytes{instance="$node",job="$job",device!~'rootfs'}
+```
